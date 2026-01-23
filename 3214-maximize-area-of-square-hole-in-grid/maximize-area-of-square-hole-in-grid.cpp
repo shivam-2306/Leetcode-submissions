@@ -30,7 +30,7 @@ public:
             }
         }
          vertical = max(temp, vertical);
-        cout<<horizontal<<" "<<vertical;
+        // cout<<horizontal<<" "<<vertical;
         return (min(vertical, horizontal)+1)*(min(vertical, horizontal)+1);
     }
 };
