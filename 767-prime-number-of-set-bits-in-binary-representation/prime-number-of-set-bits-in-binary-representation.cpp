@@ -5,7 +5,7 @@ public:
         int res = 0;
         for(int i = left;i<=right;i++){
             int bits = __builtin_popcount(i);
-            res += s.find(bits)!=s.end();
+            res += s.count(bits);
         }
         return res;
     }
