@@ -3,21 +3,30 @@ public:
     bool hasAllCodes(string s, int k) {
         if (s.size() < k) return false;
 
-        int total = 1 << k;
-        vector<bool> seen(total, false);
+        vector<bool> array(1 << k, false);
 
-        int hash = 0;
-        int mask = total - 1;
+        string temp = s.substr(0, k);
 
-        for (int i = 0; i < s.size(); i++) {
-            hash = ((hash << 1) & mask) | (s[i] - '0');
+        // initial conversion once
+        int val = stoi(temp, nullptr, 2);
+        array[val] = true;
 
-            if (i >= k - 1 && !seen[hash]) {
-                seen[hash] = true;
-                total--;
-                if (total == 0) return true;
-            }
+        int mask = (1 << k) - 1;
+        int j = k;
+
+        while (j < s.size()) {
+            for (int i = 0; i < k - 1; i++)
+                temp[i] = temp[i + 1];
+            temp[k - 1] = s[j];
+            val = ((val << 1) & mask) | (s[j] - '0');
+
+            array[val] = true;
+            j++;
         }
-        return false;
+
+        for (bool v : array)
+            if (!v) return false;
+
+        return true;
     }
 };
