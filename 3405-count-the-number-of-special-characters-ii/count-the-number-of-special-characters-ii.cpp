@@ -1,26 +1,33 @@
 class Solution {
 public:
     int numberOfSpecialChars(string word) {
-        unordered_set<int> s;
-        unordered_set<int> ignore;
+        // Replacing unordered_set with fast boolean lookup arrays
+        // Size 128 covers all ASCII values perfectly
+        bool s[200] = {false};
+        bool ignore[200] = {false};
         int res = 0;
+
         for (auto i : word) {
-            int temp = i + 0;
-            if (temp > 96 && temp < 123 && ignore.find(temp) == ignore.end()) {
-                if (s.find(temp - 32) != s.end()) {
+            int temp = i; // 'temp' is just the ASCII value of the character
+            
+            // Your original logic: if character is lowercase ('a' to 'z')
+            if (temp >= 'a' && temp <= 'z' && !ignore[temp]) {
+                if (s[temp - 32]) { // temp - 32 converts lowercase to uppercase
                     res--;
-                    ignore.insert(temp);
+                    ignore[temp] = true;
                     continue;
                 }
-                s.insert(temp);
+                s[temp] = true;
                 continue;
             }
-            if (s.find(temp) == s.end()) {
-                if(s.find(temp+32) != s.end()){
+            
+            // Your original logic: if character is uppercase
+            if (!s[temp]) {
+                if (s[temp + 32]) { // temp + 32 converts uppercase to lowercase
                     res++;
-                    s.insert(temp);
-                }else {
-                    ignore.insert(temp+32);
+                    s[temp] = true;
+                } else {
+                    ignore[temp + 32] = true;
                 }
             }
         }
