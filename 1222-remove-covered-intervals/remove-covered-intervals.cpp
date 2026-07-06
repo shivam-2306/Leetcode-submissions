@@ -7,11 +7,6 @@ public:
             }
             else return a[0]<b[0];
         });
-        for(auto i:intervals){
-            for(auto j:i){
-                cout<<j<<" ";
-            }cout<<'\n';
-        }
         int res = 0;
         int x = -1, y = -1;
         for(auto i:intervals){
