@@ -3,7 +3,7 @@ public:
     vector<bool> pathExistenceQueries(int n, vector<int>& nums, int maxDiff, vector<vector<int>>& queries) {
         unordered_map<int,int> m;
         m[0] = 1;
-        cout<<nums[0]<<"\n";
+        // cout<<nums[0]<<"\n";
         int graph = 1;
         for(int i = 1;i<n;i++){
             if(nums[i]-nums[i-1] <= maxDiff){
