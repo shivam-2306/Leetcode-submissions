@@ -8,7 +8,7 @@ public:
         for(int i = 1;i<n;i++){
             if(nums[i]-nums[i-1] <= maxDiff){
                 // cout<<"if\n";
-                m[i-1] = graph;
+                // m[i-1] = graph;
                 m[i] = graph;
             }
             else {
