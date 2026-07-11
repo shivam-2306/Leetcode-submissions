@@ -1,67 +1,55 @@
+#include <vector>
+#include <queue>
+
+using namespace std;
+
 class Solution {
 public:
-    int res = 0;
-    void traverser(int num, vector<vector<int>>& adjacencyList,
-                   vector<int>& visited, bool begin) {
-        if (adjacencyList[num].size() == 0){
-            res++;return;}
-        if (begin) {
-            bool trace = false;
-            visited[num] = 1;
-            for (auto i : adjacencyList[num]) {
-                visited[i] = 1;
-            }
-            for (auto i : adjacencyList[num]) {
-                if(adjacencyList[num].size() != adjacencyList[i].size()){
-                    trace = true;
-                }
-                for (auto j : adjacencyList[i]) {
-                    if (visited[j] == 0) {
-                        visited[j] = 1;
-                        trace = true;
-                        traverser(j, adjacencyList, visited, false);
+    int countCompleteComponents(int n, vector<vector<int>>& edges) {
+        // Step 1: Build the adjacency list
+        vector<vector<int>> adj(n);
+        for (const auto& edge : edges) {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+
+        vector<bool> visited(n, false);
+        int completeComponents = 0;
+
+        // Step 2: Traverse each component
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                int vertexCount = 0;
+                int degreeSum = 0;
+
+                // BFS to explore the entire connected component
+                queue<int> q;
+                q.push(i);
+                visited[i] = true;
+
+                while (!q.empty()) {
+                    int curr = q.front();
+                    q.pop();
+                    
+                    vertexCount++;
+                    degreeSum += adj[curr].size(); // Add the degree of the current node
+
+                    for (int neighbor : adj[curr]) {
+                        if (!visited[neighbor]) {
+                            visited[neighbor] = true;
+                            q.push(neighbor);
+                        }
                     }
                 }
-            }
-            if (!trace)
-                res++;
-        }
-        for (auto i : adjacencyList[num]) {
-            if (visited[i] == 0) {
-                visited[i] = 1;
-                traverser(i, adjacencyList, visited, false);
+
+                // Step 3: Check if the component is complete
+                // In a complete graph of V vertices, the sum of all degrees is V * (V - 1)
+                if (degreeSum == vertexCount * (vertexCount - 1)) {
+                    completeComponents++;
+                }
             }
         }
-    }
-    // return true;
-    int countCompleteComponents(int n, vector<vector<int>>& edges) {
-        vector<vector<int>> adjacencyList(n);
-        for (auto i : edges) {
-            adjacencyList[i[0]].push_back(i[1]);
-            adjacencyList[i[1]].push_back(i[0]);
-        }
-        vector<int> visited(n, 0);
-        int temp = 0;
-        // for (auto i : adjacencyList) {
-        //     cout << temp << "====>  ";
-        //     temp++;
-        //     for (auto j : i) {
-        //         cout << j << " ";
-        //     }
-        //     cout << "\n";
-        // }
-        // cout << "\n\n\n\n";
-        for (int i = 0; i < n; i++) {
-            if (visited[i] == 0) {
-                visited[i] = 1;
-                // cout << i << "\n";
-                traverser(i, adjacencyList, visited, true);
-                // if (connected) {
-                //     cout << "   Found\n";
-                //     res++;
-                // }
-            }
-        }
-        return res;
+
+        return completeComponents;
     }
 };
