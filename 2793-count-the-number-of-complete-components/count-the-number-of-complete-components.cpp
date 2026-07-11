@@ -42,19 +42,19 @@ public:
         }
         vector<int> visited(n, 0);
         int temp = 0;
-        for (auto i : adjacencyList) {
-            cout << temp << "====>  ";
-            temp++;
-            for (auto j : i) {
-                cout << j << " ";
-            }
-            cout << "\n";
-        }
-        cout << "\n\n\n\n";
+        // for (auto i : adjacencyList) {
+        //     cout << temp << "====>  ";
+        //     temp++;
+        //     for (auto j : i) {
+        //         cout << j << " ";
+        //     }
+        //     cout << "\n";
+        // }
+        // cout << "\n\n\n\n";
         for (int i = 0; i < n; i++) {
             if (visited[i] == 0) {
                 visited[i] = 1;
-                cout << i << "\n";
+                // cout << i << "\n";
                 traverser(i, adjacencyList, visited, true);
                 // if (connected) {
                 //     cout << "   Found\n";
