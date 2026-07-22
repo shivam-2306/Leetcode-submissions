@@ -30,7 +30,7 @@ public:
 
     int subsequencePairCount(vector<int>& nums) {
         n = nums.size();
-
+        
         dp.assign(
             n + 1,
             vector<vector<int>>(
