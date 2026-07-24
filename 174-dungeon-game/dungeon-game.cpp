@@ -12,11 +12,11 @@ public:
                 if(dp[i][j]>0)dp[i][j]=0;
             }
         }
-        for(auto i:dp){
-            for(auto j:i)
-            cout<<j<<" ";
-            cout<<endl;
-        }
+        // for(auto i:dp){
+        //     for(auto j:i)
+        //     cout<<j<<" ";
+        //     cout<<endl;
+        // }
         // return dp[0][0];
         if(dp[0][0] > 0){
             return 1;
