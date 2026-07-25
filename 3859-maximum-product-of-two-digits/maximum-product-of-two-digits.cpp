@@ -4,7 +4,7 @@ public:
         priority_queue<int> q;
         while(n>0){
             q.push(n%10);
-            cout<<q.top()<<" ";
+            // cout<<q.top()<<" ";
             n/=10;
         }
         int a = q.top();
