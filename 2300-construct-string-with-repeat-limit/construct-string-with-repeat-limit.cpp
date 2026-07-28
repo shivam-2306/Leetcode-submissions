@@ -8,31 +8,21 @@ public:
 
     string repeatLimitedString(string s, int repeatLimit) {
         vector<int> frequencyMap(26, 0);
-
         for (auto i : s) {
             frequencyMap[i - 'a']++;
         }
-
         string res = "";
-
         int i = 25, j = 24;
-
         while (i >= 0 && frequencyMap[i] == 0) {
             i--;
         }
-
         if (i < 0) return res;
-
         j = i - 1;
-
         while (j >= 0 && frequencyMap[j] == 0) {
             j--;
         }
-
         while (i >= 0) {
-
             if (frequencyMap[i] > repeatLimit) {
-
                 addString(repeatLimit, i, res);
                 frequencyMap[i] -= repeatLimit;
                 if (j < 0) break;
@@ -42,7 +32,6 @@ public:
                     j--;
                 }
             }
-
             else {
                 addString(frequencyMap[i], i, res);
                 frequencyMap[i] = 0;
@@ -54,7 +43,6 @@ public:
                 }
             }
         }
-
         return res;
     }
 };
