@@ -8,9 +8,9 @@ public:
         sort(frequencyMap.begin(), frequencyMap.end());
         int covered = 0;
         int res = 0;
-        for(auto i: frequencyMap){
-            cout<<i<<" ";
-        }
+        // for(auto i: frequencyMap){
+        //     cout<<i<<" ";
+        // }
         for (int j = 25;j>=0;j--){
             if(frequencyMap[j] == 0) break;
             if(covered < 8){
