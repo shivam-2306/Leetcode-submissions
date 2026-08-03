@@ -12,8 +12,8 @@ public:
         return dp[i][j] = max(sumRight, sumLeft);
     }
     bool stoneGame(vector<int>& stoneValue) {
-        vector<vector<int> > dp(stoneValue.size(), vector<int> (stoneValue.size(), INT_MIN));
-        int maxi = calculate(stoneValue, 0, stoneValue.size()-1,dp );
-        return maxi > 0;
+        // vector<vector<int> > dp(stoneValue.size(), vector<int> (stoneValue.size(), INT_MIN));
+        // int maxi = calculate(stoneValue, 0, stoneValue.size()-1,dp );
+        return true;
     }
 };
