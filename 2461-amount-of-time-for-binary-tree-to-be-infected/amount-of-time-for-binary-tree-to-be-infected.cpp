@@ -5,6 +5,7 @@ public:
 
     void adjMaker(unordered_map<TreeNode*, vector<TreeNode*>>& adj,
                   TreeNode* root) {
+
         if (root == nullptr)
             return;
 
@@ -32,33 +33,35 @@ public:
         unordered_set<TreeNode*> visited;
 
         startVal = start;
+
         adjMaker(adj, root);
 
         queue<TreeNode*> q;
 
         q.push(this->start);
+        q.push(nullptr); // END OF LEVEL
+
         visited.insert(this->start);
 
         int res = -1;
 
         while (!q.empty()) {
-
-            int size = q.size();
-            res++;
-
-            while (size--) {
-
-                TreeNode* temp = q.front();
-                q.pop();
-
-                for (TreeNode* node : adj[temp]) {
-
-                    if (visited.find(node) != visited.end())
-                        continue;
-
-                    visited.insert(node);
-                    q.push(node);
+            TreeNode* temp = q.front();
+            q.pop();
+            if (temp == nullptr) {
+                res++;
+                if (!q.empty()) {
+                    q.push(nullptr);
                 }
+                continue;
+            }
+            for (TreeNode* node : adj[temp]) {
+
+                if (visited.find(node) != visited.end())
+                    continue;
+
+                visited.insert(node);
+                q.push(node);
             }
         }
 
